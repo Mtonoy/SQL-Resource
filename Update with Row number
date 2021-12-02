@@ -1,0 +1,14 @@
+// Update a Colm with a row number Sql server 
+// Here (HS.ItemSpecification) is my table name ;
+
+UPDATE HS.ItemSpecification
+SET HS.ItemSpecification.SKUNumber  = SubQuery.rowNumber
+FROM (
+         SELECT Id ,ROW_NUMBER() OVER (ORDER BY [id]) AS rowNumber
+         FROM HS.ItemSpecification
+     ) SubQuery
+INNER JOIN HS.ItemSpecification ON
+        SubQuery.Id = HS.ItemSpecification.Id
+        
+        
+        
