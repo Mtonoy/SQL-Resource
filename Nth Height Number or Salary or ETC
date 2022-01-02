@@ -1,0 +1,11 @@
+//==============Nth Height Number or Salary or ETC====================
+
+select * from ranks where shortOrder = ( select min( shortOrder ) from ranks   
+            where  shortOrder IN (select distinct TOP 3                                    
+                                shortOrder from ranks order by shortOrder desc )                                
+                                 ) 
+                                 
+Rank & ShortOrder as a Example where 3 is N
+if N=2 then 2nd height 
+N=3 3rd height 
+so on 
