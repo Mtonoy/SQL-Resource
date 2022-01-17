@@ -1,0 +1,39 @@
+
+===== Create Table =========
+
+CREATE TABLE Students
+	(ID int IDENTITY(1, 1) PRIMARY KEY,StudentName varchar(5), RollNo int)
+;
+
+======== Insert Data In Table ==================
+	
+INSERT INTO Students
+	(StudentName, RollNo)
+VALUES
+	('john', 1),
+	('john', 1),
+	('sally', 2),
+	('sally', 3),
+	('sally', 4),
+	('sally', 3),
+    ('sally', 2)
+;
+
+============= Select all data from table ====================
+
+select * from Students
+
+============ Delete Duplicate Row from The Table ================
+
+;WITH CTE AS(
+   SELECT StudentName, RollNo,
+       RN = ROW_NUMBER()OVER(PARTITION BY  RollNo ORDER BY RollNo)
+   FROM dbo.Students
+)
+DELETE FROM CTE WHERE RN > 1
+
+============= Select all New data from table ====================
+
+SELECT * FROM dbo.Students
+
+
