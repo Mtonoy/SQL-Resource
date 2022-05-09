@@ -1,0 +1,16 @@
+declare @Date_From datetime
+declare @Date_To datetime, @dt datetime
+
+set @Date_From = (SELECT DATEADD(mm, DATEDIFF(mm, 0, GETDATE()), 0))
+set @Date_To = (SELECT DATEADD (dd, -1, DATEADD(mm, DATEDIFF(mm, 0, GETDATE()) + 1, 0)))
+
+if (datepart(d, @Date_From)>1)
+ set @dt = convert(char(10), cast(month(@Date_From)+1 as char(2)) + '/01/' + cast(year(@Date_From) as char(4)), 101)
+else
+ set @dt = @Date_From
+
+while (@dt<@Date_To)
+begin
+ print convert(char(10), @dt, 101)
+ set @dt = dateadd(d, 1, @dt)
+end
