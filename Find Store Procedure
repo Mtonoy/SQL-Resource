@@ -1,0 +1,13 @@
+Last Updaed Store procedure :
+
+SELECT name, create_date, modify_date 
+FROM sys.objects
+WHERE type = 'P'
+ORDER BY modify_date DESC
+
+Last Created Store procedure :  
+
+SELECT name, create_date, modify_date 
+FROM sys.objects
+WHERE type = 'P'
+ORDER BY create_date DESC
