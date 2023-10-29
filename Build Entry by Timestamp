@@ -1,0 +1,35 @@
+
+--select * from Building
+--select * from Objects
+--select * from DataField
+--select * from Reading where BuildingId=10
+
+--declare @i int=1;
+
+--while(@i<11)
+--begin
+--	Insert into DataField(Name)
+--	select 'DataField-'+ Cast(@i AS NVARCHAR(MAX))
+--	set @i=@i+1;
+--End
+
+DECLARE @StartDate datetime2 = '2022-01-01 00:00:00'
+DECLARE @EndDate datetime2 = '2023-12-31 23:59:59'
+DECLARE @BuildingId int = 10 -- Change this to the desired Building Id
+DECLARE @ObjectId int = 1 -- Change this to the desired Object Id
+DECLARE @DataFieldId int = 1 -- Change this to the desired DataField Id
+DECLARE @IntervalInSeconds float = 60
+
+WHILE @StartDate <= @EndDate
+BEGIN
+    INSERT INTO Reading (BuildingId, ObjectId, DataFieldId, Value, Timestamp)
+    SELECT 
+        @BuildingId, 
+        FLOOR(RAND()*(10-1+1)+1), 
+        FLOOR(RAND()*(10-1+1)+1), 
+        CONVERT(decimal(18,2), RAND() * 50), -- Replace with your actual value generation logic
+        @StartDate
+
+    SET @StartDate = DATEADD(SECOND, @IntervalInSeconds, @StartDate)
+END
+
